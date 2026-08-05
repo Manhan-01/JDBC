@@ -20,6 +20,7 @@ public class DemoJDDBC {
         String url = "jdbc:postgresql://localhost:5432/Demo";
         String uname = "postgres";
         String pass = "1234";
+        String query = "select name from wipro where id = 20381569;";
 //        try{
 //            Connection conn = DriverManager.getConnection(url,uname,pass);
 //            System.out.println("Connected to database successfully");
@@ -28,7 +29,23 @@ public class DemoJDDBC {
 //        }
 
         Connection conn = DriverManager.getConnection(url,uname,pass);
+
+
         System.out.println("Connected to database successfully");
+
+//        4. Create statement
+        Statement st = conn.createStatement();
+
+//        5. execute statement
+        ResultSet rs=  st.executeQuery(query);
+        rs.next();
+//        System.out.println(rs.next());
+        String sname = rs.getString("name");
+        System.out.println(sname);
+//        6.close
+        conn.close();
+        System.out.println("Connection closed successfully");
+
 
 
     }
